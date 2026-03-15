@@ -16,6 +16,7 @@
         --card-border: rgba(255, 255, 255, 0.08);
         --text-main: #ffffff;
         --text-muted: #8b949e;
+        --alert-red: #ff0000; /* Added red variable for the blink effect */
     }
 
     * {
@@ -149,6 +150,18 @@
         box-shadow: 0 12px 24px rgba(88, 101, 242, 0.35);
     }
 
+    
+/* Blinking Animation for Update Text */
+    @keyframes blinkAlert {
+        0% { color: var(--text-muted); }
+        50% { color: var(--alert-red); }
+        100% { color: var(--text-muted); }
+    }
+
+    .blink-text {
+        animation: blinkAlert 0.8s ease-in-out infinite;
+        font-weight: 600;
+    }
 </style>
 </head>
 
@@ -163,7 +176,7 @@
     <h1>Kochunni Edition Version 3</h1>
 
     <p>
-        A new update is available!<br>
+        <span class="blink-text">A new update is available!</span><br>
         Download the latest version below.
     </p>
 
