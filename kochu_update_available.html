@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Update Available - Kochunni Edition</title>
+
+<style>
+    :root {
+        --discord-color: #5865F2;
+        --discord-hover: #4752C4;
+        --download-color: #23a559;
+        --download-hover: #1e8f4c;
+        --bg-color: #0d1117;
+        --card-bg: rgba(255, 255, 255, 0.03);
+        --card-border: rgba(255, 255, 255, 0.08);
+        --text-main: #ffffff;
+        --text-muted: #8b949e;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: radial-gradient(circle at top center, #1f2937 0%, var(--bg-color) 60%);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-main);
+        overflow: hidden;
+    }
+
+    .glow-circle {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: var(--download-color);
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.15;
+        z-index: 0;
+        top: -50px;
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 40px 30px;
+        width: 90%;
+        max-width: 400px;
+        background: var(--card-bg);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--card-border);
+        border-radius: 24px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        
+        animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    @keyframes fadeUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .logo {
+        width: 96px;
+        height: 96px;
+        object-fit: contain;
+        margin-bottom: 24px;
+        border-radius: 20px;
+        filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+    }
+
+    h1 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+    }
+
+    p {
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+    }
+
+    /* Base Button Styling */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        gap: 12px;
+        padding: 16px 24px;
+        color: white;
+        border-radius: 14px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.2s ease;
+        margin-bottom: 12px;
+    }
+
+    .btn:active {
+        transform: translateY(1px) scale(0.98);
+    }
+
+    .btn-icon {
+        width: 22px;
+        height: 22px;
+        fill: currentColor;
+    }
+
+    /* Download Button Specifics */
+    .download-btn {
+        background: var(--download-color);
+        box-shadow: 0 8px 20px rgba(35, 165, 89, 0.25);
+    }
+
+    .download-btn:hover {
+        background: var(--download-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(35, 165, 89, 0.35);
+    }
+
+    /* Discord Button Specifics */
+    .discord-btn {
+        background: var(--card-border); /* Muted background for secondary button */
+        border: 1px solid rgba(255,255,255,0.1);
+        margin-bottom: 0;
+    }
+
+    .discord-btn:hover {
+        background: var(--discord-hover);
+        border-color: var(--discord-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(88, 101, 242, 0.35);
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="glow-circle"></div>
+
+<div class="container">
+
+    <img src="kochu.png" alt="Kochunni Logo" class="logo">
+
+    <h1>Kochunni Edition Version 3</h1>
+
+    <p>
+        A new update is available!<br>
+        Download the latest version below.
+    </p>
+
+    <a class="btn download-btn" href="https://www.dropbox.com/scl/fi/4msnrwdwh7oo1rtjfmo7t/QuickEdit_search-done-and-before-download-support.apk?rlkey=nhoujgosffqpqqyi29gsqyha5&st=zsmo4bgk&dl=1">
+        <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+        </svg>
+        Download Update
+    </a>
+
+    <a class="btn discord-btn" href="https://discord.com/users/702608046672576592">
+        <svg class="btn-icon" viewBox="0 0 225 225" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0 C0.495 1.485 0.495 1.485 1 3 C-0.1859375 3.4125 -1.371875 3.825 -2.59375 4.25 C-10.86445164 7.17983314 -18.96628113 10.24193002 -26.8125 14.1875 C-27.76962891 14.66799805 -27.76962891 14.66799805 -28.74609375 15.15820312 C-32.69693998 17.19667166 -36.34958936 19.47881287 -40 22 C-38.88625 21.54109375 -37.7725 21.0821875 -36.625 20.609375 C-26.56280742 16.53293118 -16.65559596 13.14952951 -6 11 C-5.29311035 10.85046875 -4.5862207 10.7009375 -3.85791016 10.546875 C28.16327677 3.99146766 59.39760609 8.23247549 89.82128906 19.21557617 C91.53917656 19.83408497 93.26785638 20.42261879 95 21 C91.34505799 18.97796934 87.67573767 16.98395584 84 15 C83.22140625 14.57074219 82.4428125 14.14148437 81.640625 13.69921875 C73.78572935 9.54154122 65.39816482 6.83511132 57 4 C57.66 2.68 58.32 1.36 59 0 C77.93527399 -1.15930249 99.25236488 7.01892656 113.59765625 19.20703125 C116.64614309 22.75120701 118.39105372 26.36200928 120.25 30.625 C120.6305957 31.48818848 121.01119141 32.35137695 121.40332031 33.24072266 C129.35854269 51.78441781 135.31621735 71.16509822 139 91 C139.24339111 92.30976807 139.24339111 92.30976807 139.49169922 93.64599609 C145.37020245 126.53285475 145.37020245 126.53285475 140.265625 136.328125 C138.0126327 138.92295061 135.74432195 140.94067468 133 143 C132.40058594 143.54011719 131.80117187 144.08023438 131.18359375 144.63671875 C122.30426401 152.20500652 109.42133815 158.02594155 98 160 C96.78183594 160.24492187 95.56367188 160.48984375 94.30859375 160.7421875 C84.64253322 162.14362229 84.64253322 162.14362229 80.18359375 159.0390625 C77.84844646 156.47694043 75.89787108 153.89787041 74 151 C73.29230469 150.00806641 73.29230469 150.00806641 72.5703125 148.99609375 C71.66312355 147.69787508 70.82008625 146.35492511 70 145 C70.72703125 144.72027344 71.4540625 144.44054687 72.203125 144.15234375 C86.77712811 138.43696438 86.77712811 138.43696438 98 128 C97.12601563 128.43570313 96.25203125 128.87140625 95.3515625 129.3203125 C60.20025169 146.49095418 22.02118425 149.97131251 -15.30859375 137.359375 C-23.71046023 134.26535433 -32.02408639 131.09704985 -40 127 C-31.74125667 135.41168302 -22.2347097 140.48808771 -11 144 C-12.54022071 147.45747461 -14.6045734 150.14307383 -17 153.0625 C-19.13049187 155.66686965 -21.13212937 158.19819406 -23 161 C-36.44198491 163.832815 -54.00816425 157.05930985 -65.33203125 149.890625 C-79.85086634 139.29826733 -79.85086634 139.29826733 -83 133 C-86.13119103 100.55654203 -75.92572637 66.77096015 -64 37 C-63.67918457 36.18047852 -63.35836914 35.36095703 -63.02783203 34.51660156 C-59.13702864 24.74315638 -55.82620459 17.80505218 -46 13 C-45.37915527 12.67741211 -44.75831055 12.35482422 -44.11865234 12.02246094 C-30.10553792 4.74648512 -15.98647609 -0.28046449 0 0 Z M-20.796875 77.98828125 C-24.92817425 83.68357236 -26.4188419 88.14485313 -25.80859375 95.21875 C-24.64018997 102.40135848 -21.12386099 107.67526624 -15.3125 112 C-9.76741622 113.67398755 -4.21544202 114.17320182 1.3125 112.15625 C6.42333851 109.29108295 9.79174457 105.42112491 12 100 C13.76882171 93.18838844 13.11068698 87.29371552 10 81 C7.05813432 76.08257489 3.48497708 73.64549313 -2 72 C-9.36896215 70.92452985 -15.70133022 72.34995018 -20.796875 77.98828125 Z M48.296875 80.0859375 C44.47437805 85.72757456 44.26633908 91.38776489 45 98 C46.7749274 104.20693174 50.69973458 108.44599372 56 112 C60.83064775 113.61021592 66.1478112 113.95802887 71.03515625 112.31640625 C77.0205051 109.14614455 80.85938731 104.37468801 83 98 C83.90758699 90.93981746 83.33412796 84.78726124 79 79 C74.98094642 74.72917276 71.75469461 72.35498931 65.8515625 71.796875 C57.80924999 71.62756316 53.46226969 74.00410181 48.296875 80.0859375 Z" transform="translate(83,32)"/>
+        </svg>
+        Contact on Discord
+    </a>
+
+</div>
+
+</body>
+</html>
