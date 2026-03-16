@@ -1,40 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checking Version...</title>
-    <style>
-        body { background: #121212; color: #00bcd4; text-align: center; font-family: sans-serif; padding-top: 50px; }
-    </style>
 </head>
 <body>
-    <h2 id="log">Checking...</h2>
-    
     <script>
-        // 1. Your latest version on GitHub
-        var latestVersion = 3.0; 
-        
-        // 2. Safely read the app's version (bulletproof old-Android method)
-        var urlString = window.location.href;
-        var appVersion = 1.0; // Safe default
-        
-        if(urlString.indexOf("?v=") !== -1) {
-            appVersion = parseFloat(urlString.split("?v=")[1]);
+        // 1. CHANGE THIS NUMBER whenever you release a new update!
+        var latestVersion = 1.0; 
+
+        // 2. The script reads the "?v=1.0" from the app's URL
+        var urlParams = new URLSearchParams(window.location.search);
+        var appVersion = parseFloat(urlParams.get('v'));
+
+        // 3. The Math
+        if (latestVersion > appVersion) {
+            // The GitHub version is newer! Redirect to the update page.
+            window.location.href = "kochu_update_available.html";
+        } else {
+            // The app is up to date! Trigger the VIP Bouncer.
+            window.location.href = "kochu://noupdate";
         }
-
-        // 3. Print the math to the screen!
-        document.getElementById("log").innerText = "App: " + appVersion + " | Latest: " + latestVersion;
-
-        // 4. Wait 2 seconds so you can read it, then Redirect
-        setTimeout(function() {
-            if (latestVersion > appVersion) {
-                // UPDATE AVAILABLE
-                window.location.href = "kochu_update_available.html";
-            } else {
-                // NO UPDATE
-                window.location.href = "kochu://noupdate";
-            }
-        }, 2000); 
     </script>
 </body>
 </html>
