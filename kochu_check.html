@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checking Version...</title>
+</head>
+<body>
+    <script>
+        // 1. CHANGE THIS NUMBER whenever you release a new update!
+        var latestVersion = 1.0; 
+
+        // 2. The script reads the "?v=1.0" from the app's URL
+        var urlParams = new URLSearchParams(window.location.search);
+        var appVersion = parseFloat(urlParams.get('v'));
+
+        // 3. The Math
+        if (latestVersion > appVersion) {
+            // The GitHub version is newer! Redirect to the update page.
+            window.location.href = "kochu_update_available.html";
+        } else {
+            // The app is up to date! Trigger the VIP Bouncer.
+            window.location.href = "kochu://noupdate";
+        }
+    </script>
+</body>
+</html>
