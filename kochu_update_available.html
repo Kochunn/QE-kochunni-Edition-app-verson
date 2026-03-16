@@ -173,7 +173,7 @@
 
     <img src="kochu.png" alt="Kochunni Logo" class="logo">
 
-    <h1>Kochunni Edition Version 3</h1>
+    <h1 id="version-title">Kochunni Edition</h1>
 
     <p>
         <span class="blink-text">A new update is available!</span><br>
@@ -196,5 +196,17 @@
 
 </div>
 
+<script>
+    
+    var urlParams = new URLSearchParams(window.location.search);
+    var newVersion = urlParams.get('latest');
+
+    
+    if (newVersion) {
+        document.getElementById("version-title").innerText = "Kochunni Edition Version " + newVersion;
+    }
+</script>
+
+    
 </body>
 </html>
