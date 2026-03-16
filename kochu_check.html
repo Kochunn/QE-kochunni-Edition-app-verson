@@ -15,7 +15,8 @@
         // 3. The Math
         if (latestVersion > appVersion) {
             // The GitHub version is newer! Redirect to the update page.
-            window.location.href = "kochu_update_available.html";
+            window.location.replace("kochu_update_available.html?latest=" + latestVersion);
+
         } else {
             // The app is up to date! Trigger the VIP Bouncer.
             window.location.href = "kochu://noupdate";
