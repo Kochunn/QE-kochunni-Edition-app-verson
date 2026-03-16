@@ -197,14 +197,17 @@
 </div>
 
 <script>
-    
+
     var urlParams = new URLSearchParams(window.location.search);
     var newVersion = urlParams.get('latest');
-
     
     if (newVersion) {
-        document.getElementById("version-title").innerText = "Kochunni Edition Version " + newVersion;
+        
+        var formattedVersion = parseFloat(newVersion).toFixed(1);
+        
+        document.getElementById("version-title").innerText = "Kochunni Edition Version " + formattedVersion;
     }
+    
 </script>
 
     
