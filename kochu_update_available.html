@@ -34,6 +34,10 @@
         justify-content: center;
         color: var(--text-main);
         overflow: hidden;
+
+        -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* IE 10 and IE 11 */
+        user-select: none; /* Standard syntax */
     }
 
     .glow-circle {
@@ -112,6 +116,10 @@
         font-weight: 600;
         transition: all 0.2s ease;
         margin-bottom: 12px;
+
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none; 
+        -webkit-user-drag: none;     
     }
 
     .btn:active {
