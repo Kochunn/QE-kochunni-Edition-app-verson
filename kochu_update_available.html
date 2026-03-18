@@ -173,7 +173,12 @@
 
     <img src="kochu.png" alt="Kochunni Logo" class="logo">
 
-    <h1 id="version-title">Kochunni Edition</h1>
+        <h1>Kochunni Edition</h1>
+
+    <div style="background: rgba(35, 165, 89, 0.15); border: 1px solid var(--download-color); color: #fff; padding: 6px 14px; border-radius: 20px; display: inline-block; font-weight: 600; font-size: 14px; margin-bottom: 20px; letter-spacing: 0.5px;">
+        New Update: <span id="dynamic-version" style="color: #00bcd4;">Loading...</span>
+    </div>
+
 
     <p>
         <span class="blink-text">A new update is available!</span><br>
@@ -197,19 +202,20 @@
 </div>
 
 <script>
-
     var urlParams = new URLSearchParams(window.location.search);
     var newVersion = urlParams.get('latest');
     
     if (newVersion) {
-        
         var formattedVersion = parseFloat(newVersion).toFixed(1);
         
-        //document.getElementById("version-title").innerText = "Kochunni Edition Version " + formattedVersion;
-        document.getElementById("version-title").innerHTML = "Kochunni Edition <br> Version " + formattedVersion;
+        
+        document.getElementById("dynamic-version").innerText = formattedVersion;
+    } else {
+        
+        document.getElementById("dynamic-version").innerText = "Available";
     }
-    
 </script>
+
 
     
 </body>
