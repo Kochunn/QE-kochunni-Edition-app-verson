@@ -16,7 +16,7 @@
         --card-border: rgba(255, 255, 255, 0.08);
         --text-main: #ffffff;
         --text-muted: #8b949e;
-        --alert-red: #ff0000; /* Added red variable for the blink effect */
+        --alert-red: #ff0000;
     }
 
     * {
@@ -35,9 +35,9 @@
         color: var(--text-main);
         overflow: hidden;
 
-        -webkit-user-select: none; /* Safari */
-        -ms-user-select: none; /* IE 10 and IE 11 */
-        user-select: none; /* Standard syntax */
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 
     .glow-circle {
@@ -72,10 +72,7 @@
     }
 
     @keyframes fadeUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        to { opacity: 1; transform: translateY(0); }
     }
 
     .logo {
@@ -101,7 +98,6 @@
         margin-bottom: 30px;
     }
 
-    /* Base Button Styling */
     .btn {
         display: inline-flex;
         align-items: center;
@@ -116,6 +112,9 @@
         font-weight: 600;
         transition: all 0.2s ease;
         margin-bottom: 12px;
+        position: relative;
+        overflow: hidden;
+        z-index: 1; /* Keep text above the progress fill */
 
         -webkit-tap-highlight-color: transparent;
         -webkit-touch-callout: none; 
@@ -132,7 +131,7 @@
         fill: currentColor;
     }
 
-    /* Download Button Specifics */
+    /* Base Download Button */
     .download-btn {
         background: var(--download-color);
         box-shadow: 0 8px 20px rgba(35, 165, 89, 0.25);
@@ -144,9 +143,39 @@
         box-shadow: 0 12px 24px rgba(35, 165, 89, 0.35);
     }
 
-    /* Discord Button Specifics */
+    /* --- THE PROGRESS BAR FILL --- */
+    .download-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: var(--progress, 0%);
+        background: rgba(0, 0, 0, 0.25); /* Darker overlay for the progress */
+        z-index: -1;
+        transition: width 0.15s ease-out; /* Smoothly animates the width */
+    }
+
+    .download-btn.success {
+        background: #1f8042;
+        pointer-events: none;
+    }
+    
+    .download-btn.success::before {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Spinning icon animation */
+    .spin {
+        animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+        100% { transform: rotate(360deg); }
+    }
+
     .discord-btn {
-        background: var(--card-border); /* Muted background for secondary button */
+        background: var(--card-border);
         border: 1px solid rgba(255,255,255,0.1);
         margin-bottom: 0;
     }
@@ -158,8 +187,6 @@
         box-shadow: 0 12px 24px rgba(88, 101, 242, 0.35);
     }
 
-    
-/* Blinking Animation for Update Text */
     @keyframes blinkAlert {
         0% { color: var(--text-muted); }
         50% { color: var(--alert-red); }
@@ -181,23 +208,22 @@
 
     <img src="kochu.png" alt="Kochunni Logo" class="logo">
 
-        <h1>Kochunni Edition</h1>
+    <h1>Kochunni Edition</h1>
 
     <div style="background: rgba(35, 165, 89, 0.15); border: 1px solid var(--download-color); color: #fff; padding: 6px 14px; border-radius: 20px; display: inline-block; font-weight: 600; font-size: 14px; margin-bottom: 20px; letter-spacing: 0.5px;">
         New Update: <span id="dynamic-version" style="color: #00bcd4;">Loading...</span>
     </div>
-
 
     <p>
         <span class="blink-text">A new update is available!</span><br>
         Download the latest version below.
     </p>
 
-    <a class="btn download-btn" href="https://dl.dropboxusercontent.com/scl/fi/6xj3wlrwp3ct3isqj5z5l/QuickEdit_-Kochunni-Edition-4.0.apk?rlkey=1cpo41j043sbp4qx0nq6sgeuq&st=nu08ooyl&dl=1" download>
-        <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <a id="download-btn" class="btn download-btn" href="https://dl.dropboxusercontent.com/scl/fi/6xj3wlrwp3ct3isqj5z5l/QuickEdit_-Kochunni-Edition-4.0.apk?rlkey=1cpo41j043sbp4qx0nq6sgeuq&st=nu08ooyl&dl=1" download>
+        <svg id="btn-icon" class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
         </svg>
-        Download Update
+        <span id="btn-text">Download Update</span>
     </a>
 
     <a class="btn discord-btn" href="https://discord.com/users/702608046672576592">
@@ -210,21 +236,69 @@
 </div>
 
 <script>
+    // Version parameters
     var urlParams = new URLSearchParams(window.location.search);
     var newVersion = urlParams.get('latest');
     
     if (newVersion) {
         var formattedVersion = parseFloat(newVersion).toFixed(1);
-        
-        
         document.getElementById("dynamic-version").innerText = formattedVersion;
     } else {
-        
         document.getElementById("dynamic-version").innerText = "Available";
     }
+
+    // --- REALISTIC PROGRESS ANIMATION ---
+    var downloadBtn = document.getElementById("download-btn");
+    var btnText = document.getElementById("btn-text");
+    var btnIcon = document.getElementById("btn-icon");
+    var isDownloading = false;
+
+    downloadBtn.addEventListener("click", function(e) {
+      
+        if (isDownloading) {
+            e.preventDefault(); 
+            return;
+        }
+        
+        isDownloading = true;
+       
+        btnIcon.innerHTML = `<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" stroke-dasharray="30" class="spin"></circle>`;
+        
+        let progress = 0;
+        
+      
+        let progressInterval = setInterval(function() {
+
+            let increment = Math.random() * 4 + 1; 
+            
+
+            if (progress > 85) {
+                increment = Math.random() * 1.5 + 0.1; 
+            }
+
+            progress += increment;
+
+
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(progressInterval);
+                
+                downloadBtn.classList.add("success");
+                btnText.innerText = "Check Notifications!";
+                
+
+                btnIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>`;
+                btnIcon.classList.remove("spin");
+            } else {
+
+                btnText.innerText = "Downloading... " + Math.floor(progress) + "%";
+            }
+            
+            downloadBtn.style.setProperty('--progress', progress + '%');
+            
+        }, 120);
+    });
 </script>
 
-
-    
 </body>
 </html>
